@@ -1,0 +1,185 @@
+<template>
+  <div class="news-container">
+    <div class="news-top">
+      <div class="news-back">
+        <router-link to="/allNews">
+          <i class="icon icon-images"></i>
+        </router-link>
+      </div>
+      <div class="news-prev">
+        <router-link :to="'/news/'+prev" v-if="prev!=-1">
+          <i class="fa fa-chevron-left"></i>
+        </router-link>
+        <span v-else>--</span>
+      </div>
+      <div class="news-next">
+        <router-link :to="'/news/'+next" v-if="next!=-1">
+          <i class="fa fa-chevron-right"></i>
+        </router-link>
+        <span v-else>--</span>
+      </div>
+    </div>
+    <div class="news-info">
+      <a href="#">文章类型</a>：{{nowNew.Type}}- {{nowNew.passage_time|timeFormatter}}
+    </div>
+    <div class="news-title">
+      <h1 v-if="screenWidth>767">{{nowNew.title}}</h1>
+      <h3 v-else>{{nowNew.title}}</h3>
+    </div>
+    <div class="news-img">
+      <img :src="nowNew.passage_img" alt="" width="100%">
+    </div>
+    <div class="news-content">
+      <div v-for="(item,i) in contentSlice" :key="i">
+        <p v-text="item"></p>
+        <br>
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+export default {
+  name: "myNews",
+  created() {
+    this.getContent();
+  },
+  data() {
+    return {
+      content: "",
+      contentSlice: []
+    };
+  },
+  methods: {
+    getContent() {
+      $.ajax({
+        async: true,
+        url: this.nowNew.content,
+        contentType: "text/json,charset=utf-8",
+        scriptCharset: "utf-8",
+        success: result => {
+          this.content = result;
+          this.contentSlice = this.content.split(/\s\s+/g);
+        }
+      });
+    }
+  },
+  filters: {
+    timeFormatter(data) {
+      let time = new Date(data);
+      let y = time.getFullYear();
+      let m = time.getMonth() + 1;
+      let d = time.getDate();
+      let h = time.getHours();
+      let min = time.getMinutes();
+      return (
+        `${y}年${m}月${d}日` +
+        h.toString().padStart(2, 0) +
+        ":" +
+        min.toString().padStart(2, 0)
+      );
+    }
+  },
+  props: {
+    next: {
+      type: Number,
+      default: -1
+    },
+    prev: {
+      type: Number,
+      default: -1
+    },
+    nowNew: {
+      type: Object,
+      required: true
+    }
+  },
+  computed: {
+    nowId() {
+      return this.$route.params.id;
+    },
+    screenWidth() {
+      return this.$store.state.screenWidth;
+    }
+  },
+  watch: {
+    nowId() {
+      this.getContent();
+    }
+  }
+};
+</script>
+
+<style lang="less" scoped>
+.news-container {
+  width: 70%;
+  margin: 0.5rem 15% 2rem;
+  .news-img {
+    width: 100%;
+  }
+  .news-info {
+    .normol() {
+      margin: 0;
+      color: #ccc;
+      font-weight: 400;
+      font-size: 0.8rem;
+    }
+    .normol();
+    a {
+      .normol();
+      &:hover {
+        color: #fd685b;
+      }
+    }
+  }
+  .news-title {
+    h1 {
+      margin-top: 0.5rem;
+      font-size: 2.5rem;
+    }
+    h3 {
+      margin-top: 0.5rem;
+      //   font-size: 2.5rem;
+    }
+  }
+  .news-content {
+    margin: 2rem 0 5rem;
+  }
+}
+.news-top {
+  position: relative;
+  border-bottom: 1px solid #ccc;
+  height: 5rem;
+  .news-back {
+    position: absolute;
+    left: 50%;
+    transform: scale(0.7);
+    margin-left: -14px;
+    .icon-images {
+      color: #ccc;
+      &:hover {
+        color: #fd685b;
+      }
+    }
+  }
+  .news-prev {
+    position: absolute;
+    top: 1.5rem;
+    .fa-chevron-left {
+      color: #ccc;
+      &:hover {
+        color: #fd685b;
+      }
+    }
+  }
+  .news-next {
+    .news-prev();
+    .fa-chevron-right {
+      color: #ccc;
+      &:hover {
+        color: #fd685b;
+      }
+    }
+    right: 0;
+  }
+}
+</style>
