@@ -60,7 +60,7 @@ export default {
     if (this.screenWidth < 1400)
       this.marginTop = -5 * 1400 / this.screenWidth + "rem";
     let nowHeight = this.height / 100 * this.$store.state.screenHeight;
-    console.log(nowHeight);
+    // console.log(nowHeight);
     this.$store.commit("setBannerHeight", nowHeight);
   },
   mounted() {
@@ -102,7 +102,7 @@ export default {
     },
     touchStart(e) {
       this.sx = e.touches[0].pageX;
-      console.log(this.sx);
+      // console.log(this.sx);
       this.stop();
     },
     touchMove(e) {
@@ -114,7 +114,7 @@ export default {
           if (this.getPre() != this.flag) {
             this.$refs.img[this.getPre()].style =
               "transform:translateX(" + (nx - this.sx - this.screenWidth) + "px";
-            console.log(this.getPre());
+            // console.log(this.getPre());
           }
         } else if (nx < this.sx) {
           if (this.getNext() != this.flag)
@@ -131,7 +131,7 @@ export default {
             this.$refs.img2[this.getPre()].style =
               this.preImg +
               ";transform:translateX(" + (nx - this.sx - this.screenWidth) + "px";
-            console.log(this.getPre());
+            // console.log(this.getPre());
           }
         } else if (nx < this.sx) {
           if (this.getNext() != this.flag)

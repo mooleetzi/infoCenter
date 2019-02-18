@@ -1,13 +1,14 @@
-# inforcenter
+# infocenter
 
-> A Vue.js project
+> freeStu of CDUT
 
 ## Build Setup
 
-``` bash
+```bash
 # install dependencies
 npm install
-
+# change the baseUrl of axios in the main.js
+    ...
 # serve with hot reload at localhost:8080
 npm run dev
 

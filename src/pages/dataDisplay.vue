@@ -154,7 +154,7 @@ export default {
       this.mgUrl = this.magazine[0].magazine;
       this.mgImg = this.magazine[0].cover;
       this.mgTitle = this.magazine[0].title;
-      console.log(this.$refs.echart)
+      // console.log(this.$refs.echart)
       this.drawLine(this.$refs.echart);
     },
     change(e) {
