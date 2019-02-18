@@ -19,7 +19,7 @@ export default new Router({
       component: index
     },
     {
-      path: "/allNews",
+      path: "/allNews/:search?",
       name: "allNews",
       component: allNews
     },

@@ -60,7 +60,7 @@ export default {
     if (this.screenWidth < 1400)
       this.marginTop = -5 * 1400 / this.screenWidth + "rem";
     let nowHeight = this.height / 100 * this.$store.state.screenHeight;
-    console.log(nowHeight);
+    // console.log(nowHeight);
     this.$store.commit("setBannerHeight", nowHeight);
   },
   mounted() {
@@ -102,7 +102,7 @@ export default {
     },
     touchStart(e) {
       this.sx = e.touches[0].pageX;
-      console.log(this.sx);
+      // console.log(this.sx);
       this.stop();
     },
     touchMove(e) {
@@ -113,31 +113,38 @@ export default {
         if (nx > this.sx) {
           if (this.getPre() != this.flag) {
             this.$refs.img[this.getPre()].style =
-              "transform:translateX(" + (nx - this.sx - this.screenWidth) + "px";
-            console.log(this.getPre());
+              "transform:translateX(" +
+              (nx - this.sx - this.screenWidth) +
+              "px";
+            // console.log(this.getPre());
           }
         } else if (nx < this.sx) {
           if (this.getNext() != this.flag)
             this.$refs.img[this.getNext()].style =
-            "transform:translateX(" + (this.screenWidth + nx - this.sx) + "px";
+              "transform:translateX(" +
+              (this.screenWidth + nx - this.sx) +
+              "px";
         }
       } else {
         let nx = e.touches[0].pageX;
         this.$refs.img2[this.flag].style =
-          this.nowImg +
-          ";transform:translateX(" + (nx - this.sx) + "px)";
+          this.nowImg + ";transform:translateX(" + (nx - this.sx) + "px)";
         if (nx > this.sx) {
           if (this.getPre() != this.flag) {
             this.$refs.img2[this.getPre()].style =
               this.preImg +
-              ";transform:translateX(" + (nx - this.sx - this.screenWidth) + "px";
-            console.log(this.getPre());
+              ";transform:translateX(" +
+              (nx - this.sx - this.screenWidth) +
+              "px";
+            // console.log(this.getPre());
           }
         } else if (nx < this.sx) {
           if (this.getNext() != this.flag)
             this.$refs.img2[this.getNext()].style =
-            this.nextImg +
-            ";transform:translateX(" + (this.screenWidth + nx - this.sx) + "px";
+              this.nextImg +
+              ";transform:translateX(" +
+              (this.screenWidth + nx - this.sx) +
+              "px";
         }
       }
     },
@@ -145,11 +152,15 @@ export default {
       if (this.imgType == 1) {
         this.tx = e.changedTouches[0].pageX;
         if (this.tx > this.sx) {
-          this.$refs.img[this.flag].style = this.$refs.img[this.getPre()].style =
+          this.$refs.img[this.flag].style = this.$refs.img[
+            this.getPre()
+          ].style =
             "";
           this.flag = this.getPre();
         } else if (this.tx < this.sx) {
-          this.$refs.img[this.flag].style = this.$refs.img[this.getNext()].style =
+          this.$refs.img[this.flag].style = this.$refs.img[
+            this.getNext()
+          ].style =
             "";
 
           this.flag = this.getNext();
@@ -190,13 +201,23 @@ export default {
       set() {}
     },
     nowImg() {
-      return 'background-image:url(' + this.bannerImg[this.flag].passage_img + ')';
+      return (
+        "background-image:url(" + this.bannerImg[this.flag].passage_img + ")"
+      );
     },
     preImg() {
-      return 'background-image:url(' + this.bannerImg[this.getPre()].passage_img + ')';
+      return (
+        "background-image:url(" +
+        this.bannerImg[this.getPre()].passage_img +
+        ")"
+      );
     },
     nextImg() {
-      return 'background-image:url(' + this.bannerImg[this.getNext()].passage_img + ')';
+      return (
+        "background-image:url(" +
+        this.bannerImg[this.getNext()].passage_img +
+        ")"
+      );
     }
   },
   watch: {
@@ -206,226 +227,8 @@ export default {
     }
   }
 };
-
 </script>
-<style scoped>
-@keyframes myAniIn {
-  from {
-    opacity: 0;
-    transform: scale(1.4);
-  }
-
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes myAniOut {
-  from {
-    opacity: 1;
-    transform: scale(1.4);
-  }
-
-  to {
-    opacity: 0;
-    transform: scale(1);
-  }
-}
-
-.myAniIn {
-  animation-name: myAniIn;
-  animation-duration: 0.5s;
-}
-
-.myAniOut {
-  animation-name: myAniOut;
-  animation-duration: 0.5s;
-}
-
-@keyframes titleIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes source {
-  from {
-    opacity: 0;
-    transform: translateX(100%);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.myAniSourceIn {
-  animation: source .5s linear .5s;
-}
-
-.myAniTitleIn {
-  animation: titleIn 0.5s linear 0s;
-}
-
-.myAniRdIn {
-  animation-name: titleIn;
-  animation-duration: 0.5s;
-  animation-delay: 1s;
-  color: white !important;
-  background-color: rgba(0, 0, 0, 0);
-}
-
-.myAniRdIn :hover {
-  background-color: white;
-  color: black;
-}
-
+<style scoped src="./../../assets/css/mySlide.css">
 </style>
-<style lang="less" scoped>
-@bgc: rgba(0, 0, 0, 0.75);
-
-.slide-container {
-  position: relative;
-  width: 100%;
-  background-color: @bgc;
-  overflow: hidden;
-
-  &:hover .icon {
-    display: block;
-  }
-}
-
-.slide-navigation {
-  font-size: 32px;
-}
-
-.icon {
-  position: absolute;
-  top: 50%;
-  color: grey;
-  display: none;
-
-  &:hover {
-    color: white;
-    cursor: pointer;
-  }
-
-  &-arrow-left-simple {
-    position: absolute;
-    left: 2%;
-  }
-
-  &-arrow-right-simple {
-    position: absolute;
-    right: 2%;
-  }
-}
-
-.slide-item {
-  position: absolute;
-  width: 100%;
-
-  &-from {
-    position: absolute;
-    bottom: 3%;
-    right: 0;
-    width: 12rem;
-    background-color: rgba(0, 0, 0, .35);
-    color: rgba(255, 255, 255, .75);
-    font-style: italic;
-    font-size: .9rem;
-    line-height: 2.5rem;
-    z-index: 10;
-
-    span {
-      text-decoration: underline;
-
-      &:hover {
-        text-decoration: none;
-        cursor: pointer;
-        z-index: 10;
-      }
-
-      z-index:10;
-    }
-  }
-
-  &-other {
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    width: 40rem;
-    margin-left: -20rem;
-    text-align: center;
-
-    @media screen and (max-width: 767px) {
-      width: 80%;
-      left: 10%;
-      top: 10%;
-      margin-left: 0;
-    }
-  }
-
-  &-first {
-    line-height: 3rem;
-    border: 2px solid white;
-  }
-}
-
-.slide-item-img {
-  width: 100%;
-  height: 100%;
-  filter: brightness(0.7);
-
-  &Two {
-    width: 100%;
-    height: 100%;
-    filter: brightness(0.7);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center;
-  }
-}
-
-.slide-item-title {
-  position: absolute;
-  top: 40%;
-  width: 60%;
-  left: 20%;
-  text-align: center;
-  z-index: 10;
-}
-
-.slide-pagination {
-  position: absolute;
-  bottom: 6rem;
-  z-index: 8;
-  left: 50%;
-  @a: 1rem;
-
-  &-item {
-    display: inline-block;
-    width: @a;
-    height: @a;
-    border: 2px solid white;
-    background-color: #fff;
-    opacity: .3;
-    border-radius: @a;
-    margin-right: @a;
-
-    &:hover,
-    &-active {
-      // background-color: #fff;
-      opacity: 1;
-      cursor: pointer;
-    }
-  }
-}
-
+<style lang="less" scoped src="./../../assets/less/mySlide.less">
 </style>

@@ -42,6 +42,9 @@ export default {
       },
       true
     );
+    setTimeout(this.getImages, 2000);
+    setTimeout(this.getMagazine, 3000);
+    setTimeout(this.getBarData, 4000);
   },
   mounted() {},
   data() {
@@ -54,40 +57,31 @@ export default {
       this.$http("/allNews")
         .then(result => {
           this.$store.commit("setNowPage", result.data);
-          console.log("news获取成功");
         })
         .catch(err => {
           console.log("get news info failed");
         });
-      // await this.$http("/allImages")
-      //   .then(result => {
-      //     this.$store.commit("setImage", result.data.results);
-      //     console.log("Image获取成功");
-      //   })
-      //   .catch(err => {
-      //     console.log(err);
-      //     console.log("get image info failed");
-      //   });
-      // await this.$http("/allVedio")
-      //   .then(result => {
-      //     this.$store.commit("setVideoInfo", result.data.results);
-      //     console.log(result.data.results);
-      //     console.log("video获取成功");
-      //   })
-      //   .catch(err => {
-      //     console.log(err);
-      //     console.log("get video info failed");
-      //   });
-      // await this.$http("/barData")
-      //   .then(result => {
-      //     this.$store.commit("setMagazine", result.data.results);
-      //     console.log(result.data.results);
-      //     console.log("magazine获取成功");
-      //   })
-      //   .catch(err => {
-      //     console.log(err);
-      //     console.log("get magazine info failed");
-      //   });
+    },
+    getImages() {
+      this.$store.dispatch("getData", {
+        url: "/allImages",
+        mutation: "setImages",
+        callback: () => {}
+      });
+    },
+    getMagazine() {
+      this.$store.dispatch("getData", {
+        url: "/allMagazine",
+        mutation: "setMagazine",
+        callback: () => {}
+      });
+    },
+    getBarData() {
+      this.$store.dispatch("getData", {
+        url: "/allBarData",
+        mutation: "setBarData",
+        callback: () => {}
+      });
     }
   },
   computed: {

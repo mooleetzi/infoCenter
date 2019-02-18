@@ -4,11 +4,9 @@
       <div class="swiper-container-video">
         <div class="swiper-wrapper">
           <div class="swiper-slide" v-for="(item, index) in video" :key="index">
-            <div>
-              <a :href="item.vedio_url" style="z-index:10">
-                <img :src="item.vedio_img" alt="" width="100%">
-              </a>
-            </div>
+            <router-link :to="'/video/'+item.id" style="z-index:10">
+              <img :src="item.vedio_img" alt="" width="100%">
+            </router-link>
           </div>
         </div>
       </div>
@@ -68,6 +66,9 @@
     left: 50%;
     margin-left: -5rem;
     bottom: 10%;
+  }
+  .swiper-slide {
+    pointer-events: none;
   }
 }
 </style>

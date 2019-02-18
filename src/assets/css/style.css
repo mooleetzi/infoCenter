@@ -6,7 +6,10 @@
   background: #fd685b;
   color: #fff;
 }
-
+.router-link-active {
+  text-decoration: none;
+  color: transparent;
+}
 ::-moz-selection {
   background: #fd685b;
   color: #fff;

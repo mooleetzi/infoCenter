@@ -1,19 +1,49 @@
 <template>
-  <div class="news-container" v-if="passage">
-    <div class="news-other hidden-xs">
-      <div style="position:relative">
-        <div class="news-other-search">
-          <span class="pre-input">
-            <i class="icon icon-search"></i>
-          </span>
-          <input type="text" placeholder="Search..." ref="search" v-model="searching" class="plain buffer" @keyup.enter="goSearch">
+  <div class="video-container">
+    <div class="video-main">
+      <div class="video-main-item" v-for="(item, i) in img" :key="i" v-show="!flag||i in searchShow">
+        <div class="video-main-item-img">
+          <img :src="item" alt="" width="100%">
+        </div>
+        <div class="video-main-item-title">
+          <router-link :to="'/news/'+id[i]">
+            <h2>{{title[i]}}</h2>
+          </router-link>
+          <div class="video-main-item-info">
+            <a href="#">文章类型</a>：
+            <span>{{type[i]}}</span>-{{time[i]|timeFormatter}}
+          </div>
+          <p>{{content[i]|strNum}}</p>
+        </div>
+        <div></div>
+      </div>
+      <div class="video-btn">
+        <div class="video-btn-left">
+          <el-button @click="prevPage">
+            <i class="fa fa-chevron-left"></i>
+            <span v-if="nowPage&&!nowPage.previous">暂无</span>
+          </el-button>
+        </div>
+        <div class="video-btn-right">
+          <el-button @click="nextPage">
+            <span v-if="nowPage&&!nowPage.next">暂无</span>
+            <i class="fa fa-chevron-right"></i>
+          </el-button>
         </div>
       </div>
-      <div class="news-other-new">
+    </div>
+    <div class="video-aside">
+      <div class="video-aside-search">
+        <span class="pre-input">
+          <i class="icon icon-search"></i>
+        </span>
+        <input type="text" v-model="searching" @keyup.enter="goSearch" placeholder="Search...">
+      </div>
+      <div class="video-aside-about">
         <h4>新闻</h4>
         <p>闻中有新，妙笔生花，务实求真，一根笔杆，一双眼睛，一对耳朵，用心去听，用心去写，用全部力气和心血造就的每篇新闻。文字即力量。</p>
       </div>
-      <div class="news-other-magazine">
+      <div class="video-aside-magazine">
         <h4>杂志板块</h4>
         <a :href="mgUrl">
           <img :src="mgImg" alt="">
@@ -21,76 +51,13 @@
         <p>{{mgTitle}}</p>
       </div>
     </div>
-    <div class="news-outer hidden-xs" v-for="(item, i) in img" :key="i" v-show="!search||i in searchShow">
-      <div class="news-img">
-        <img :src="img[i]" alt="" width="100%">
-      </div>
-      <div class="news-title">
-        <router-link :to="'news/'+id[i]">
-          <h2>{{title[i]}}</h2>
-        </router-link>
-      </div>
-      <div class="news-info">
-        <a href="#">文章类型</a>：{{type[i]}}- {{time[i]|timeFormatter}}
-      </div>
-      <div class="news-content">
-        <p> {{content[i]|strNum}}</p>
-      </div>
-    </div>
-    <div class="news-outer-pe visible-xs" v-for="(item, i) in img" :key="item" v-show="!search||i in searchShow">
-      <div class="news-img-pe">
-        <img :src="img[i]" alt="" width="100%">
-      </div>
-      <div class="news-title-pe">
-        <router-link :to="'news/'+id[i]">
-          <h3>{{title[i]}}</h3>
-        </router-link>
-      </div>
-      <div class="news-info-pe">
-        <a href="#">文章类型</a>：{{type[i]}}- {{time[i]|timeFormatter}}
-      </div>
-      <div class="news-content-pe">
-        <p> {{content[i]|strNum}}</p>
-      </div>
-    </div>
-    <div class="news-btn">
-      <div class="news-btn-left">
-        <el-button @click="prevPage">
-          <i class="fa fa-chevron-left"></i>
-          <span v-if="!nowPage.previous">暂无</span>
-        </el-button>
-      </div>
-      <div class="news-btn-right">
-        <el-button @click="nextPage">
-          <span v-if="!nowPage.next">暂无</span>
-          <i class="fa fa-chevron-right"></i>
-        </el-button>
-      </div>
-    </div>
-    <div class="news-other-pe visible-xs">
-      <div style="position:relative">
-        <div class="news-other-search">
-          <span class="pre-input">
-            <i class="icon icon-search"></i>
-          </span>
-          <input type="text" placeholder="Search..." ref="search" v-model="searching" class="plain buffer" @keyup.enter="goSearch">
-        </div>
-      </div>
-      <div class="news-other-new-pe">
-        <h5>新闻</h5>
-        <p>闻中有新，妙笔生花，务实求真，一根笔杆，一双眼睛，一对耳朵，用心去听，用心去写，用全部力气和心血造就的每篇新闻。文字即力量。</p>
-      </div>
-      <div class="news-other-magazine-pe">
-        <h5>杂志板块</h5>
-        <a :href="mgUrl">
-          <img :src="mgImg" alt="">
-        </a>
-        <p>{{mgTitle}}</p>
-      </div>
-    </div>
+    <div style="padding:2rem"></div>
   </div>
 </template>
-<style lang="less" scoped src="./../../assets/less/allNews_myNews.less">
+<style lang="less" scoped src="./../../assets/less/myVideo.less">
+.video-main-item-info {
+  padding-top: -1rem;
+}
 </style>
 <script>
 export default {
@@ -99,16 +66,19 @@ export default {
     if (!this.magazine) {
       let myurl = "/allMagazine";
       let mutation = "setMagazine";
-      this.$store.dispatch("getData", { url: myurl, mutation: mutation, callback: this.passage?this.getInfo :()=>{}});
+      this.$store.dispatch("getData", {
+        url: myurl,
+        mutation: mutation,
+        callback: this.passage ? this.getInfo : () => {}
+      });
     }
   },
   mounted() {
-    if (this.magazine&&this.passage)
-      this.getInfo();
+    if (this.magazine && this.passage) this.getInfo();
   },
   data() {
     return {
-      search: null,
+      flag: true,
       searching: "",
       searchShow: [],
       content: [],
@@ -155,7 +125,7 @@ export default {
           scriptCharset: "utf-8",
           success: result => {
             this.content.push(result);
-            console.log(result);
+            // console.log(result);
           }
         });
         this.title.push(this.passage[i].title);
@@ -165,6 +135,7 @@ export default {
         this.time.push(this.passage[i].passage_time);
         i++;
       }
+      this.initSearch();
     },
     prevPage() {
       if (this.nowPage.previous)
@@ -174,19 +145,36 @@ export default {
       if (this.nowPage.next)
         this.$store.commit("setNowPage", this.nowPage.next);
     },
-    goSearch() {
-      this.search = this.searching;
-      this.searchShow = [];
-      this.content.forEach((x, i) => {
-        if (
-          x.indexOf(this.search) != -1 ||
-          this.title[i].indexOf(this.search) != -1
-        )
-          this.searchShow.push(i);
+    open() {
+      const h = this.$createElement;
+      this.$notify({
+        title: "tips",
+        message: h("i", { style: "color: teal" }, "无此项搜索结果哦"),
+        duration: 1500
       });
-      if (this.searchShow.length == 0) {
-        alert("无此项搜索结果哦");
-        this.search = null;
+    },
+    goSearch() {
+      this.$router.push({ path: "/allNews/" + this.searching });
+    },
+    initSearch() {
+      // console.log("来了");
+      if (this.search) {
+        this.searchShow = [];
+        this.content.forEach((x, i) => {
+          if (
+            x.indexOf(this.search) != -1 ||
+            this.title[i].indexOf(this.search) != -1
+          )
+            this.searchShow.push(i);
+          // console.log(x, this.search);
+        });
+        if (this.searchShow.length == 0) {
+          this.open();
+          this.flag = false;
+        } else this.flag = true;
+      } else {
+        // console.log("没有");
+        this.flag = false;
       }
     }
   },
@@ -199,6 +187,9 @@ export default {
     },
     magazine() {
       return this.$store.state.magazine;
+    },
+    search() {
+      return this.$route.params.search;
     }
   },
   watch: {
@@ -208,10 +199,12 @@ export default {
     magazine() {
       if (this.passage) this.getInfo();
     },
+    search() {
+      this.initSearch();
+    },
     searching() {
-      if (this.searching == "") this.search = null;
+      if (!this.searching) this.flag = false;
     }
-  },
+  }
 };
-
 </script>

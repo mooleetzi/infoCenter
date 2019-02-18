@@ -4,7 +4,7 @@
     <div class="img-nav">
       <el-tabs v-model="activeName" :stretch="$store.state.screenWidth>767?true:false" tab-position="top">
         <el-tab-pane label="全部图片" name="全部图片">
-          <div class="img-pc hidden-xs">
+          <div class="img-pc hidden-xs" v-if="screenWidth>768">
             <div v-if="all.length" class="img img-first animated zoomIn" :style="{'background-image':'url('+all[0].img_url+')'}">
               <img :src="all[0].img_url" :alt="all[0].img_name" preview="1" :preview-text="all[0].img_auth" width="100%"></img>
               <div class="img-bg">
@@ -26,7 +26,7 @@
               </div>
             </div>
           </div>
-          <div class="img-pe visible-xs">
+          <div class="img-pe visible-xs" v-else>
             <div class="img-item animated zoomIn" :style="{'background-image':'url('+item.img_url+')'}" v-for="(item, index) in all" :key="index">
               <img :src="item.img_url" alt="" preview="1" :preview-text="item.img_auth">
             </div>
@@ -45,8 +45,8 @@
             </el-button>
           </div>
         </el-tab-pane>
-        <el-tab-pane label="LOGO" name="LOGO">
-          <div class="img-pc hidden-xs">
+        <el-tab-pane label="LOGO" name="LOGO" :lazy="true">
+          <div class="img-pc hidden-xs" v-if="screenWidth>768">
             <div v-if="logo.length" class="img img-first animated zoomIn" :style="{'background-image':'url('+logo[0].img_url+')'}">
               <img :src="logo[0].img_url" :alt="logo[0].img_name" preview="2" :preview-text="logo[0].img_auth"></img>
               <div class="img-bg">
@@ -68,7 +68,7 @@
               </div>
             </div>
           </div>
-          <div class="img-pe visible-xs">
+          <div class="img-pe visible-xs" v-else>
             <div class="img-item animated zoomIn" :style="{'background-image':'url('+item.img_url+')'}" v-for="(item, index) in logo" :key="index">
               <img :src="item.img_url" alt="" preview="2" :preview-text="item.img_auth">
             </div>
@@ -87,8 +87,8 @@
             </el-button>
           </div>
         </el-tab-pane>
-        <el-tab-pane label="办公室美华" name="办公室美华">
-          <div class="img-pc hidden-xs">
+        <el-tab-pane label="办公室美华" name="办公室美华" :lazy="true">
+          <div class="img-pc hidden-xs" v-if="screenWidth>768">
             <div v-if="officeDec.length" class="img img-first animated zoomIn" :style="{'background-image':'url('+officeDec[0].img_url+')'}">
               <img :src="officeDec[0].img_url" :alt="officeDec[0].img_name" preview="3" :preview-text="officeDec[0].img_auth"></img>
               <div class="img-bg">
@@ -129,8 +129,8 @@
             </el-button>
           </div>
         </el-tab-pane>
-        <el-tab-pane label="宣传类" name="宣传类">
-          <div class="img-pc hidden-xs">
+        <el-tab-pane label="宣传类" name="宣传类" :lazy="true">
+          <div class="img-pc hidden-xs" v-if="screenWidth>768">
             <div v-if="propagate.length" class="img img-first animated zoomIn" :style="{'background-image':'url('+propagate[0].img_url+')'}">
               <img :src="propagate[0].img_url" :alt="propagate[0].img_name" preview="4" :preview-text="propagate[0].img_auth"></img>
               <div class="img-bg">
@@ -152,7 +152,7 @@
               </div>
             </div>
           </div>
-          <div class="img-pe visible-xs">
+          <div class="img-pe visible-xs" v-else>
             <div class="img-item animated zoomIn" :style="{'background-image':'url('+item.img_url+')'}" v-for="(item, index) in propagate" :key="index">
               <img :src="item.img_url" alt="" preview="4" :preview-text="item.img_auth">
             </div>
@@ -171,8 +171,8 @@
             </el-button>
           </div>
         </el-tab-pane>
-        <el-tab-pane label="展示类" name="展示类">
-          <div class="img-pc hidden-xs">
+        <el-tab-pane label="展示类" name="展示类" :lazy="true">
+          <div class="img-pc hidden-xs" v-if="screenWidth>768">
             <div v-if="display.length" class="img img-first animated zoomIn" :style="{'background-image':'url('+display[0].img_url+')'}">
               <img :src="display[0].img_url" :alt="display[0].img_name" preview="5" :preview-text="display[0].img_auth"></img>
               <div class="img-bg">
@@ -195,7 +195,7 @@
               </div>
             </div>
           </div>
-          <div class="img-pe visible-xs">
+          <div class="img-pe visible-xs" v-else>
             <div class="img-item animated zoomIn" :style="{'background-image':'url('+item.img_url+')'}" v-for="(item, index) in display" :key="index">
               <img :src="item.img_url" alt="" preview="5" :preview-text="item.img_auth">
             </div>
@@ -264,6 +264,7 @@ export default {
         callback: this.getImg
       });
     } else {
+      // console.log("yes");
       this.getImg();
     }
   },
@@ -290,6 +291,9 @@ export default {
   computed: {
     images() {
       return this.$store.state.images;
+    },
+    screenWidth() {
+      return this.$store.state.screenWidth;
     }
   }
 };

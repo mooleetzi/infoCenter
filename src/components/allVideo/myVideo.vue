@@ -6,7 +6,7 @@
           <img :src="item.vedio_img" alt="" width="100%">
         </div>
         <div class="video-main-item-title">
-          <router-link :to="'video/'+item.id">
+          <router-link :to="'/video/'+item.id">
             <h2>{{item.vedio_name}}</h2>
           </router-link>
           <a href="#">视频来源</a>：
@@ -18,12 +18,12 @@
         <div class="video-btn-left">
           <el-button @click="prevPage">
             <i class="fa fa-chevron-left"></i>
-            <span v-if="!all.previous">暂无</span>
+            <span v-if="video&&!video.previous">暂无</span>
           </el-button>
         </div>
         <div class="video-btn-right">
           <el-button @click="nextPage">
-            <span v-if="!all.next">暂无</span>
+            <span v-if="video&&!video.next">暂无</span>
             <i class="fa fa-chevron-right"></i>
           </el-button>
         </div>
@@ -81,9 +81,8 @@ export default {
       if (this.searchShow.length == 0) {
         this.open();
         this.flag = false;
-      }
-      else {
-        this.flag=true;
+      } else {
+        this.flag = true;
       }
     } else this.flag = false;
   },
@@ -95,7 +94,6 @@ export default {
     return {
       videoInfo: [],
       all: {},
-      // search: null,
       flag: true,
       searching: "",
       searchShow: [],
@@ -134,16 +132,18 @@ export default {
 
       this.$notify({
         title: "tips",
-        message: h(
-          "i",
-          { style: "color: teal" },
-          "无此项搜索结果哦"
-        ),
-        duration:1500,
+        message: h("i", { style: "color: teal" }, "无此项搜索结果哦"),
+        duration: 1500
       });
     },
-    nextPage() {},
-    prevPage() {}
+    prevPage() {
+      if (this.nowPage.previous)
+        this.$store.commit("setVideoInfo", this.nowPage.previous);
+    },
+    nextPage() {
+      if (this.nowPage.next)
+        this.$store.commit("setNowPage", this.nowPage.next);
+    }
   },
   computed: {
     video() {
@@ -162,14 +162,13 @@ export default {
         this.searchShow = [];
         this.videoInfo.forEach((x, i) => {
           if (x.vedio_name.indexOf(this.search) != -1) this.searchShow.push(i);
-          console.log(x.vedio_name, this.search);
+          // console.log(x.vedio_name, this.search);
         });
         if (this.searchShow.length == 0) {
           this.flag = false;
           this.open();
-        }
-        else {
-          this.flag=true;
+        } else {
+          this.flag = true;
         }
       } else this.flag = false;
     }

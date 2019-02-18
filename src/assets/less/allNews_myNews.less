@@ -1,235 +1,79 @@
-.news-container {
-  width: 100%;
-  position: relative;
-
-  .news-outer {
-    width: 50%;
-
-    @media screen and (min-width: 768px) {
-      height: 22rem;
-    }
-
-    @media screen and (min-width: 1000px) {
-      height: 15rem;
-    }
-
-    margin: 2rem 0 0 0;
+.video {
+  &-container {
+    width: 100%;
+    margin-top: 2rem;
     position: relative;
-    left: 15%;
-    padding-left: 10rem;
-    border-bottom: solid 1px #ddd;
-
-    &-pe {
-      margin-top: 2rem;
-      width: 100%;
-
-      .news-img-pe {
-        position: relative;
-        width: 80%;
-        left: 10%;
-        border: 1px solid white;
-        border-radius: 8rem;
-        overflow: hidden;
-      }
-
-      .news-title-pe {
-        width: 80%;
-        position: relative;
-        left: 10%;
-        margin-top: 1rem;
-
-        h3 {
-          margin: 0 !important;
-        }
-      }
-
-      .news-info-pe {
-        width: 80%;
-        position: relative;
-        left: 10%;
-
-        .normol() {
-          margin: 0;
-          color: #ccc;
-          font-weight: 400;
-          font-size: 0.8rem;
-        }
-
-        .normol();
-
-        a {
-          .normol();
-
-          &:hover {
-            color: #fd685b;
-          }
-        }
-      }
-
-      .news-content-pe {
-        position: relative;
-        width: 80%;
-        left: 10%;
-        font-size: 0.9rem;
-      }
-    }
-
-    .news-img {
-      position: absolute;
-      width: 20%;
-      border: solid 1px white;
-      border-radius: 2rem;
-      overflow: hidden;
-      left: 0;
-    }
-
-    .news-title {
-      width: 100%;
-
-      h2 {
-        margin: 0 !important;
-      }
-    }
-
-    .news-content {
-      width: 100%;
-    }
-
-    .news-info {
-      .normol() {
-        margin: 0;
-        color: #ccc;
-        font-weight: 400;
-        font-size: 0.8rem;
-      }
-
-      .normol();
-
-      a {
-        .normol();
-
-        &:hover {
-          color: #fd685b;
-        }
-      }
-    }
   }
-
-  .news-btn {
-    width: 50%;
-    margin: 4rem 15%;
-    margin-bottom: 12rem;
-
-    @media screen and (max-width: 767px) {
-      width: 80%;
-      margin: 4rem 10%;
-      margin-bottom: 8rem;
-    }
-
+  &-btn {
+    clear: none;
+    width: 100%;
+    padding-bottom: 5rem;
     &-left {
       float: left;
-      clear: none !important;
+      clear: none;
     }
-
     &-right {
       float: right;
-      clear: none !important;
+      clear: none;
     }
   }
-
-  .news-other-pe {
-    width: 80%;
+  &-main {
+    width: 50%;
+    float: left;
     position: relative;
-    left: 10%;
-
-    .normal() {
-      h5 {
+    margin-left: 10%;
+    @media screen and (max-width: 767px) {
+      width: 80%;
+      left: 10%;
+      float: none;
+      margin-left: 0;
+      position: relative;
+    }
+    &-item {
+      margin: 2rem 0;
+      padding-bottom: 2rem;
+      &-img {
+        float: left;
+        width: 20%;
+        border: 1px solid white;
+        border-radius: 2rem;
+        overflow: hidden;
+        @media screen and (max-width: 767px) {
+          float: none;
+          width: 100%;
+        }
+      }
+      &-title {
+        margin-top: -1.5rem;
+        margin-left: 1rem;
+        float: left;
+        clear: none;
         color: #ccc;
-      }
-
-      p {
         font-size: 0.8rem;
+        a {
+          color: #ccc;
+        }
+        @media screen and (max-width: 767px) {
+          float: none;
+        }
       }
-
-      margin-top: 3rem;
-    }
-
-    .news-other-new-pe {
-      .normal();
-    }
-
-    .news-other-magazine-pe {
-      .normal();
-      margin-bottom: 3rem;
+      border-bottom: 1px solid #ccc;
     }
   }
-
-  .news-other {
+  &-aside {
+    width: 25%;
     float: right;
-    clear: none !important;
-    position: relative;
-    top: 3.5rem;
-
-    @media screen and (min-width: 768px) {
-      right: 0;
+    clear: none;
+    margin-right: 10%;
+    @media screen and (max-width: 767px) {
+      float: none;
+      width: 80%;
+      margin-right: 0;
     }
-
-    @media screen and (min-width: 1000px) {
-      right: 5%;
-    }
-
-    @media screen and(min-width: 1200px) {
-      right: 10%;
-    }
-
-    &-search {
-      input {
-        padding-left: 3.077em;
-        width: 20rem;
-        border: 1px solid #ddd;
-        border-radius: 1.538em;
-        transform: scale(0.8);
-
-        @media screen and (max-width: 767px) {
-          width: 15rem;
-          height: 2rem;
-          transform: scale(1);
-        }
-      }
-
-      .pre-input {
-        position: absolute;
-        transform: scale(0.4);
-        margin-top: -0.7rem;
-        margin-left: 2.1rem;
-        filter: opacity(0.4);
-
-        @media screen and (max-width: 767px) {
-          margin-left: 0.5rem;
-          margin-top: -1.2rem;
-        }
-      }
-    }
-
-    &-new {
-      position: absolute;
-      left: 2rem;
-      padding-right: 2rem;
-
-      h4 {
-        color: #ccc;
-      }
-
-      p {
-        font-size: 0.8rem;
-      }
-    }
-
     &-magazine {
-      position: absolute;
-      top: 15rem;
+      margin-top: 3rem;
+      position: relative;
       left: 2rem;
-
       h4 {
         color: #ccc;
       }
@@ -241,6 +85,49 @@
       img {
         width: 10rem;
         height: 6rem;
+      }
+    }
+    &-about {
+      margin-top: 3rem;
+      position: relative;
+      left: 2rem;
+      padding-right: 2rem;
+      h4 {
+        color: #ccc;
+      }
+
+      p {
+        font-size: 0.8rem;
+      }
+    }
+    &-search {
+      margin-top: 3rem;
+      input {
+        padding-left: 3.077em;
+        width: 20rem;
+        border: 1px solid #ddd;
+        border-radius: 1.538em;
+        transform: scale(0.8);
+
+        @media screen and (max-width: 767px) {
+          width: 15rem;
+          height: 2rem;
+          transform: scale(1);
+          margin-left: 10%;
+        }
+      }
+
+      .pre-input {
+        position: absolute;
+        transform: scale(0.4);
+        margin-top: -1rem;
+        margin-left: 2rem;
+        filter: opacity(0.4);
+        z-index: 999;
+        @media screen and (max-width: 767px) {
+          margin-left: 10%;
+          margin-top: -1.2rem;
+        }
       }
     }
   }
