@@ -138,7 +138,6 @@ export default {
     }
     h3 {
       margin-top: 0.5rem;
-      //   font-size: 2.5rem;
     }
   }
   .news-content {
