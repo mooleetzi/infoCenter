@@ -113,9 +113,13 @@ export default {
         if (nx > this.sx) {
           if (this.getPre() != this.flag) {
             this.$refs.img[this.getPre()].style =
+<<<<<<< HEAD
               "transform:translateX(" +
               (nx - this.sx - this.screenWidth) +
               "px";
+=======
+              "transform:translateX(" + (nx - this.sx - this.screenWidth) + "px";
+>>>>>>> 362f3c90882519bdc528485266be713705bf0da8
             // console.log(this.getPre());
           }
         } else if (nx < this.sx) {
@@ -133,9 +137,13 @@ export default {
           if (this.getPre() != this.flag) {
             this.$refs.img2[this.getPre()].style =
               this.preImg +
+<<<<<<< HEAD
               ";transform:translateX(" +
               (nx - this.sx - this.screenWidth) +
               "px";
+=======
+              ";transform:translateX(" + (nx - this.sx - this.screenWidth) + "px";
+>>>>>>> 362f3c90882519bdc528485266be713705bf0da8
             // console.log(this.getPre());
           }
         } else if (nx < this.sx) {
