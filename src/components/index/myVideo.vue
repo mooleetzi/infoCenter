@@ -1,17 +1,23 @@
 <template>
   <div class="video-container">
-    <div class="video-container-wraper">
-      <div class="swiper-container-video">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide" v-for="(item, index) in video" :key="index">
-            <router-link :to="'/video/'+item.id" style="z-index:10">
-              <img :src="item.vedio_img" alt="" width="100%">
-            </router-link>
-          </div>
+    <div class="video-wraper">
+      <transition-group mode="out-in" appear enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
+        <div class="video-item" v-for="(item, index) in video" :key="item.vedio_img" v-show="index==flag">
+          <router-link :to="'/video/'+item.id">
+            <img v-lazy="item.vedio_img" alt="" srcset="" width="100%">
+          </router-link>
+        </div>
+      </transition-group>
+      <div class="video-pagination" v-if="video&&video.length">
+        <div class="video-pagination-left">
+          <i class="fa fa-chevron-left" @click="pre"></i>
+        </div>
+        <div class="video-pagination-right">
+          <i class="fa fa-chevron-right" @click="next"></i>
         </div>
       </div>
     </div>
-    <div class="my-button">
+    <div class="video-button">
       <router-link to="/allVideo">
         <el-button>点击进入视频专区</el-button>
       </router-link>
@@ -19,56 +25,82 @@
   </div>
 </template>
 <style lang="less" scoped>
-.video-container {
-  width: 100%;
-  height: 120vh;
-  position: relative;
-  background-color: #434a54;
-  .swiper-container-video {
-    position: absolute;
-    width: 576px;
-    height: 345px;
-    padding-top: 1.5rem;
-    left: 50%;
-    margin-left: -288px;
-    overflow: hidden;
+.fa {
+  color: #ccc;
+  transition: color 0.5s ease;
+  transform: scale(3);
+  &:hover {
+    color: #fff;
+    transition: color 0.5s ease;
+    cursor: pointer;
+  }
+}
+.video {
+  &-container {
+    width: 100%;
+    height: 130vh;
     @media screen and (max-width: 767px) {
-      transform: scale(0.9);
-      height: 360px;
-      width: 640px;
-      margin-left: -320px;
-      padding-top: 0.2rem;
+      height: 70vh;
     }
-    @media screen and (max-width: 376px) {
-      transform: scale(0.9);
-      height: 312px;
-      width: 380px;
-      margin-left: -190px;
-      padding-top: 6.5rem;
+    position: relative;
+    background-color: #434a54;
+    overflow: hidden;
+  }
+  .center(@w,@h) {
+    position: relative;
+    width: @w;
+    height: @h;
+    left: 50%;
+    margin-left: -0.5 * @w;
+  }
+  &-pagination {
+    position: absolute;
+    height: 2rem;
+    width: 100%;
+    top: 40%;
+    z-index: 2;
+    margin-top: -1rem;
+    &-left {
+      float: left;
+      clear: none;
+    }
+    &-right {
+      float: right;
+      clear: none;
     }
   }
   &-wraper {
-    background: url("./../../assets/career/img/mockups/desktop.svg") no-repeat;
-    width: 100%;
-    height: 462px;
-    overflow: hidden;
-    background-size: contain;
-    background-position: center;
-    @media screen and (max-width: 767px) {
-      transform: scale(0.9);
+    .center(50rem,35rem);
+    top: 3rem;
+    @media screen and (max-width: 840px) {
+      transform: scale(0.5);
+      top: -5rem;
     }
-    position: absolute;
-    top: 10%;
+    @media screen and (max-width: 400px) {
+      transform: scale(0.4);
+      top: -5rem;
+    }
+    background: url("./../../assets/career/img/mockups/desktop.svg") no-repeat;
+    background-position: center center;
   }
-  .my-button {
+  &-item {
     position: absolute;
+    width: 84%;
+    height: 66%;
+    top: 7%;
+    left: 8%;
+    z-index: 3;
+    overflow: hidden;
+  }
+  &-button {
+    position: relative;
     width: 10rem;
     left: 50%;
     margin-left: -5rem;
-    bottom: 10%;
-  }
-  .swiper-slide {
-    pointer-events: none;
+    bottom: -10rem;
+    @media screen and (max-width: 840px) {
+      bottom: 10rem;
+    }
   }
 }
 </style>
@@ -78,7 +110,9 @@ export default {
   name: "myVideo",
   data() {
     return {
-      video: []
+      video: [],
+      flag: 0,
+      timeId: null
     };
   },
   methods: {
@@ -86,6 +120,32 @@ export default {
       this.videoInfo.results.forEach(element => {
         this.video.push(element);
       });
+    },
+    play() {
+      if (this.flag == this.video.length - 1) this.flag = 0;
+      else this.flag++;
+    },
+    autoplay() {
+      if (!this.timeId) this.timeId = setInterval(this.play, 3000);
+    },
+    stop() {
+      if (this.timeId) {
+        clearInterval(this.timeId);
+        this.timeId = null;
+        setTimeout(() => {
+          this.autoplay();
+        }, 2000);
+      }
+    },
+    pre() {
+      this.stop();
+      if (this.flag == 0) this.flag = this.video.length - 1;
+      else this.flag--;
+    },
+    next() {
+      this.stop();
+      if (this.flag == this.video.length - 1) this.flag = 0;
+      else this.flag++;
     }
   },
   created() {
@@ -95,18 +155,10 @@ export default {
         mutation: "setVideoInfo",
         callback: this.getVideo
       });
+    else this.getVideo();
   },
   mounted() {
-    new Swiper(".swiper-container-video", {
-      loop: true,
-      autoplay: {
-        delay: 2000
-      },
-      effect: "fade",
-      fadeEffect: {
-        crossFade: true
-      }
-    });
+    this.autoplay();
   },
   computed: {
     videoInfo() {

@@ -42,7 +42,7 @@ export default {
       },
       true
     );
-    setTimeout(this.getImages, 2000);
+    this.getImages();
     setTimeout(this.getMagazine, 3000);
     setTimeout(this.getBarData, 4000);
   },

@@ -18,6 +18,8 @@ import preview from "vue-photo-preview";
 import "vue-photo-preview/dist/skin.css";
 import VueVideoPlayer from "vue-video-player";
 import "video.js/dist/video-js.css";
+import VueLazyload from "vue-lazyload";
+Vue.use(VueLazyload);
 Vue.use(VueVideoPlayer);
 Vue.use(preview);
 Vue.config.productionTip = false;
