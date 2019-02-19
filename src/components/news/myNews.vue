@@ -19,17 +19,17 @@
         <span v-else>--</span>
       </div>
     </div>
-    <div class="news-info">
+    <div class="news-info animated" :class="{'fadeIn':update}">
       <a href="#">文章类型</a>：{{nowNew.Type}}- {{nowNew.passage_time|timeFormatter}}
     </div>
-    <div class="news-title">
+    <div class="news-title animated" :class="{'flipInX':update}">
       <h1 v-if="screenWidth>767">{{nowNew.title}}</h1>
       <h3 v-else>{{nowNew.title}}</h3>
     </div>
-    <div class="news-img">
+    <div class="news-img animated" :class="{'fadeIn':update}">
       <img :src="nowNew.passage_img" alt="" width="100%">
     </div>
-    <div class="news-content">
+    <div class="news-content animated" :class="{'fadeIn':update}">
       <div v-for="(item,i) in contentSlice" :key="i">
         <p v-text="item"></p>
         <br>
@@ -46,21 +46,26 @@ export default {
   data() {
     return {
       content: "",
-      contentSlice: []
+      contentSlice: [],
+      update: true
     };
   },
   methods: {
     getContent() {
-      $.ajax({
-        async: true,
-        url: this.nowNew.content,
-        contentType: "text/json,charset=utf-8",
-        scriptCharset: "utf-8",
-        success: result => {
-          this.content = result;
-          this.contentSlice = this.content.split(/\s\s+/g);
-        }
-      });
+      this.update = false;
+      setTimeout(() => {
+        $.ajax({
+          async: true,
+          url: this.nowNew.content,
+          contentType: "text/json,charset=utf-8",
+          scriptCharset: "utf-8",
+          success: result => {
+            this.content = result;
+            this.contentSlice = this.content.split(/\s\s+/g);
+          }
+        });
+        this.update = true;
+      }, 0);
     }
   },
   filters: {

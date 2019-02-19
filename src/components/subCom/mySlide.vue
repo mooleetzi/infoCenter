@@ -13,11 +13,9 @@
       <div v-show="(item.title)&&index==flag" class="slide-item-title" :style="{'margin-top':marginTop}">
         <h1 class="white myAniTitleIn" v-if="$store.state.screenWidth>767">{{item.title}}</h1>
         <h3 class="white myAniTitleIn" v-else>{{item.title}}</h3>
-        <router-link :to="$route.name.trim()=='news'?('/news/'+item.id):('news/'+item.id)" active-class="myRouterActive">
-          <el-button>
-            READ MORE
-          </el-button>
-        </router-link>
+        <el-button @click="$router.push('/news/'+item.id)">
+          READ MORE
+        </el-button>
       </div>
       <div v-if="item.first&&index==flag" class="slide-item-other">
         <h3 class="slide-item-first white animated zoomIn">{{item.first}}</h3>

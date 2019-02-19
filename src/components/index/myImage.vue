@@ -5,9 +5,7 @@
       <h3 class="white" v-else>创意空间</h3>
       <p v-text="info" class="white"></p>
       <div class="my-create-button">
-        <router-link to="/imgDisplay">
-          <el-button>点击进入图片专区</el-button>
-        </router-link>
+        <el-button @click="$router.push('/imgDisplay')">点击进入图片专区</el-button>
       </div>
     </div>
     <div class="create-main">

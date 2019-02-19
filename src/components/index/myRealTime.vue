@@ -4,11 +4,9 @@
       <h4>实时资讯</h4>
     </div>
     <div class="real-time-btn">
-      <router-link to="/allNews">
-        <el-button type="primary" plain>
-          点击进入新闻专区 </el-button>
-      </router-link>
-
+      <el-button type="primary" plain @click="$router.push('/allNews')">
+        点击进入新闻专区
+      </el-button>
     </div>
   </div>
 </template>

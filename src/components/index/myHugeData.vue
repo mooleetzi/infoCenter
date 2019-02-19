@@ -19,11 +19,9 @@
       </div>
     </div>
     <div class="my-huge-data-button">
-      <router-link to="/dataDisplay">
-        <el-button type="primary" plain>
-          点击进入数据专区
-        </el-button>
-      </router-link>
+      <el-button type="primary" plain @click="$router.push('/dataDisplay')">
+        点击进入数据专区
+      </el-button>
     </div>
   </div>
 </template>
