@@ -51,7 +51,7 @@ export default {
     };
   },
   methods: {
-    getContent() {
+    getContent() {//异步更新update,实现动画效果
       this.update = false;
       setTimeout(() => {
         $.ajax({
@@ -65,11 +65,11 @@ export default {
           }
         });
         this.update = true;
-      }, 0);
+      }, 0);//将此匿名函数重新放入事件队列末尾
     }
   },
   filters: {
-    timeFormatter(data) {
+    timeFormatter(data) {//时间格式化过滤器
       let time = new Date(data);
       let y = time.getFullYear();
       let m = time.getMonth() + 1;
@@ -107,7 +107,7 @@ export default {
     }
   },
   watch: {
-    nowId() {
+    nowId() {//路由发生变化时重新获取数据
       this.getContent();
     }
   }

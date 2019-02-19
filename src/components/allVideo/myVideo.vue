@@ -56,7 +56,7 @@
 <script>
 export default {
   name: "myVideo",
-  created() {
+  created() {//异步获取数据
     if (!this.video)
       this.$store.dispatch("getData", {
         url: "/allVedio",

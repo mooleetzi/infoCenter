@@ -109,6 +109,7 @@ export default {
   data() {
     return {
       opt: [
+        //echarts数据配置
         { color: "rgba(255,0,0,0.6)", num: 73 },
         { color: "rgba(0,255,0,0.6)", num: 85 },
         { color: "rgba(0,0,255,0.6)", num: 70 },
@@ -118,7 +119,7 @@ export default {
   },
   mounted() {
     let node = document.getElementsByClassName("my-huge-data-echart-item");
-    this.drawLine(node, this.opt);
+    this.drawLine(node, this.opt); //echarts渲染数据
   },
   methods: {
     drawLine(node, opt) {
@@ -182,6 +183,7 @@ export default {
   },
   watch: {
     screenWidth() {
+      //页面宽度发生变化，echarts重新渲染
       let node = document.getElementsByClassName("my-huge-data-echart-item");
       this.drawLine(node, this.opt);
     }

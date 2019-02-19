@@ -41,7 +41,7 @@ export default {
     }
   },
   mounted() {
-    new Swiper(".swiper-container", {
+    new Swiper(".swiper-container", {//swiper轮播组件配置
       loop: true,
       pagination: {
         el: ".swiper-pagination",

@@ -223,6 +223,7 @@
 <script>
 import mySlide from "./../components/subCom/mySlide.vue";
 export default {
+  //图片懒加载
   name: "imgDisplay",
   data() {
     return {

@@ -92,6 +92,7 @@ const store = new Vuex.Store({
   },
   actions: {
     async getData(context, { url, mutation, callback }) {
+      //异步获取数据
       await axios
         .get(url)
         .then(r => {

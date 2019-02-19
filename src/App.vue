@@ -22,6 +22,7 @@ export default {
       mutation: "setVideoInfo",
       callback: () => {}
     });
+    //记录页面宽高
     window.onresize = () => {
       return (() => {
         window.screenHeight = window.innerHeight;
@@ -31,6 +32,7 @@ export default {
         this.$store.commit("setWidth", window.screenWidth);
       })();
     };
+    //记录页面下拉进度
     window.addEventListener(
       "scroll",
       () => {
@@ -43,6 +45,7 @@ export default {
       true
     );
     this.getImages();
+    //定时向后台获取数据
     setTimeout(this.getMagazine, 3000);
     setTimeout(this.getBarData, 4000);
   },

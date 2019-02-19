@@ -100,12 +100,12 @@ export default {
       let d = time.getDate();
       return `${y}年${m}月${d}日`;
     },
-    strNum(data, str) {
+    strNum(data, str) {//字符数量过滤器
       if (data) return data.substring(0, 80);
     }
   },
   methods: {
-    getInfo() {
+    getInfo() {//获取信息
       let i = 0;
       this.content = [];
       this.img = [];
@@ -118,7 +118,7 @@ export default {
       this.mgTitle = this.magazine[0].title;
       while (i < this.passage.length) {
         let filename = this.passage[i].content;
-        $.ajax({
+        $.ajax({//ajax异步获取新闻内容
           async: true,
           url: filename,
           contentType: "text/json,charset=utf-8",
@@ -137,7 +137,7 @@ export default {
       }
       this.initSearch();
     },
-    prevPage() {
+    prevPage() {//重新绑定页面数据
       if (this.nowPage.previous)
         this.$store.commit("setNowPage", this.nowPage.previous);
     },
@@ -145,7 +145,7 @@ export default {
       if (this.nowPage.next)
         this.$store.commit("setNowPage", this.nowPage.next);
     },
-    open() {
+    open() {//elementUI 信息通知组件
       const h = this.$createElement;
       this.$notify({
         title: "tips",
@@ -153,10 +153,10 @@ export default {
         duration: 1500
       });
     },
-    goSearch() {
+    goSearch() {//路由切换
       this.$router.push({ path: "/allNews/" + this.searching });
     },
-    initSearch() {
+    initSearch() {//初始化路由参数里的搜索信息
       // console.log("来了");
       if (this.search) {
         this.searchShow = [];

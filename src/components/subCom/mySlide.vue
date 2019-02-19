@@ -40,7 +40,7 @@
 <script>
 export default {
   name: "mySlide",
-  props: {
+  props: {//轮播配置
     bannerImg: {
       type: Array,
       default: []
@@ -98,12 +98,12 @@ export default {
       if (this.flag == 0) return this.flag;
       return this.flag - 1;
     },
-    touchStart(e) {
+    touchStart(e) {//移动端滑动开始事件
       this.sx = e.touches[0].pageX;
       // console.log(this.sx);
       this.stop();
     },
-    touchMove(e) {
+    touchMove(e) {//移动端滑动事件，进行图片切换位移
       if (this.imgType == 1) {
         let nx = e.touches[0].pageX;
         this.$refs.img[this.flag].style =
@@ -146,7 +146,7 @@ export default {
         }
       }
     },
-    touchEnd(e) {
+    touchEnd(e) {//
       if (this.imgType == 1) {
         this.tx = e.changedTouches[0].pageX;
         if (this.tx > this.sx) {
@@ -188,7 +188,7 @@ export default {
     }
   },
   computed: {
-    _height() {
+    _height() {//组件高度
       if (typeof this.height == "number") return this.height + "vh";
       return this.height;
     },
