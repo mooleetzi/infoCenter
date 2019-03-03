@@ -1,7 +1,7 @@
 <template>
   <!-- 头部整体盒子 -->
   <div id="header" class="container-fuild">
-    <div class="header-nav container hidden-xs" :class="{'header-nav-bottom':$store.state.navType==3}">
+    <div class="header-nav container hidden-xs" :class="{'header-nav-bottom':$store.state.navType==2}">
       <!-- 导航logo -->
       <div class="header-nav-logo">
         <h2 class="careerPc">
@@ -68,11 +68,15 @@ export default {
 @import "element-ui/lib/theme-chalk/base.css";
 
 .header-nav {
-  height: 8vh;
+  height: 3rem;
   overflow: hidden;
   width: 100%;
-  &-bottem {
-    border-bottom: solid 1px grey;
+  @media screen and (max-width: 767px) {
+    height: 4vh;
+  }
+  // border-bottom: 1px solid grey;
+  &-bottom {
+    border-bottom: solid 1px #DCDCDC;
   }
 }
 .myHead-nav-item-pc {

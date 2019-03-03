@@ -110,10 +110,10 @@ export default {
     return {
       opt: [
         //echarts数据配置
-        { color: "rgba(255,0,0,0.6)", num: 73 },
-        { color: "rgba(0,255,0,0.6)", num: 85 },
-        { color: "rgba(0,0,255,0.6)", num: 70 },
-        { color: "rgba(126,255,12,0.6)", num: 95 }
+        { color: "#FD685B", num: 73 },
+        { color: "#FFCE54", num: 85 },
+        { color: "#A0D468", num: 70 },
+        { color: "#AC92EC", num: 95 }
       ]
     };
   },

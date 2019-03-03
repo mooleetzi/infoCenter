@@ -12,7 +12,6 @@
 <style lang="less" scoped>
 .swiper-container {
   width: 100%;
-  height: 50vh;
   position: relative;
   background-color: #4fc1e9;
   .content {
@@ -25,7 +24,7 @@
     opacity: 0.7;
   }
   .swiper-slide {
-    margin-top: 4rem;
+    margin: 4rem 0;
   }
 }
 </style>
