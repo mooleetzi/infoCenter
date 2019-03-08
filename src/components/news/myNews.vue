@@ -54,6 +54,7 @@ export default {
     getContent() {//异步更新update,实现动画效果
       this.update = false;
       setTimeout(() => {
+        console.log(this.nowNew);
         $.ajax({
           async: true,
           url: this.nowNew.content,
@@ -62,6 +63,8 @@ export default {
           success: result => {
             this.content = result;
             this.contentSlice = this.content.split(/\s\s+/g);
+            console.log(result);
+
           }
         });
         this.update = true;

@@ -69,12 +69,15 @@ export default {
       this.$store.dispatch("getData", {
         url: myurl,
         mutation: mutation,
-        callback: this.passage ? this.getInfo : () => {}
+        callback: this.passage ? this.getNews : () => {}
       });
     }
   },
   mounted() {
-    if (this.magazine && this.passage) this.getInfo();
+    if (this.passage)
+      this.getNews();
+    if (this.magazine)
+      this.getMagazine();
   },
   data() {
     return {
@@ -105,7 +108,7 @@ export default {
     }
   },
   methods: {
-    getInfo() {//获取信息
+    getNews() {//获取信息
       let i = 0;
       this.content = [];
       this.img = [];
@@ -113,9 +116,7 @@ export default {
       this.id = [];
       this.type = [];
       this.time = [];
-      (this.searchShow = []), (this.mgUrl = this.magazine[0].magazine);
-      this.mgImg = this.magazine[0].cover;
-      this.mgTitle = this.magazine[0].title;
+      this.searchShow = [];
       while (i < this.passage.length) {
         let filename = this.passage[i].content;
         $.ajax({//ajax异步获取新闻内容
@@ -136,6 +137,11 @@ export default {
         i++;
       }
       this.initSearch();
+    },
+    getMagazine(){
+        this.mgUrl = this.magazine[0].magazine;
+        this.mgImg = this.magazine[0].cover;
+        this.mgTitle = this.magazine[0].title;
     },
     prevPage() {//重新绑定页面数据
       if (this.nowPage.previous)
@@ -194,10 +200,10 @@ export default {
   },
   watch: {
     passage() {
-      if (this.magazine) this.getInfo();
+      this.getNews();
     },
     magazine() {
-      if (this.passage) this.getInfo();
+      this.getMagazine();
     },
     search() {
       this.initSearch();

@@ -20,7 +20,6 @@
     <div class="video-button">
       <el-button @click="$router.push('/allVideo')">点击进入视频专区</el-button>
     </div>
-    <my-button :info="'点击进入视频专区'" :route="'/allVideo'" :color="'white'" :bgColor="'#434a54'"></my-button>
   </div>
 </template>
 <style lang="less" scoped>

@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     getImg() {
-      let arr = Array.from(this.bannerImg);
+      let arr = this.bannerImg;
       this.nowImg = arr.filter(x => x.id != this.nowId);
       arr.forEach((x, i) => {
         if (x.id == this.nowId) {

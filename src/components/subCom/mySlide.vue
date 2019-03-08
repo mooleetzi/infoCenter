@@ -227,6 +227,7 @@ export default {
 };
 </script>
 <style scoped src="./../../assets/css/mySlide.css">
+
 </style>
 <style lang="less" scoped src="./../../assets/less/mySlide.less">
 </style>

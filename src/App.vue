@@ -60,8 +60,7 @@ export default {
       this.$http("/allNews")
         .then(result => {
           this.$store.commit("setNowPage", result.data);
-        })
-        .catch(err => {
+        },err => {
           console.log("get news info failed");
         });
     },

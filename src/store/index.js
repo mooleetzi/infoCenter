@@ -12,7 +12,7 @@ const store = new Vuex.Store({
         url: "/"
       },
       {
-        name: "新闻",
+        name: "微关注",
         url: "/allNews"
       },
       {
