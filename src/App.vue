@@ -52,7 +52,6 @@ export default {
   mounted() {},
   data() {
     return {
-      test: true
     };
   },
   methods: {
