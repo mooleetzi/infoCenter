@@ -1,7 +1,7 @@
 <template>
   <div class="real-time-info">
     <div class="real-time-main">
-      <h4>实时资讯</h4>
+      <h4>微关注</h4>
     </div>
     <div class="real-time-btn">
       <el-button type="primary" plain @click="$router.push('/allNews')">

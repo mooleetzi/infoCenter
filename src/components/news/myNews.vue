@@ -27,7 +27,7 @@
       <h3 v-else>{{nowNew.title}}</h3>
     </div>
     <div class="news-img animated" :class="{'fadeIn':update}">
-      <img :src="nowNew.passage_img" alt="" width="100%">
+      <img :src="nowNew.passage_img" alt="">
     </div>
     <div class="news-content animated" :class="{'fadeIn':update}">
       <div v-for="(item,i) in contentSlice" :key="i">
@@ -55,18 +55,22 @@ export default {
       this.update = false;
       setTimeout(() => {
         console.log(this.nowNew);
-        $.ajax({
-          async: true,
-          url: this.nowNew.content,
-          contentType: "text/json,charset=utf-8",
-          scriptCharset: "utf-8",
-          success: result => {
-            this.content = result;
-            this.contentSlice = this.content.split(/\s\s+/g);
-            console.log(result);
-
-          }
-        });
+        // $.ajax({
+        //   async: true,
+        //   url: this.nowNew.content,
+        //   contentType: "text/json,charset=utf-8",
+        //   scriptCharset: "gb2312",
+        //   success: result => {
+        //     this.content = result;
+        //     this.contentSlice = this.content.split(/\s\s+/g);
+        //     console.log(result);
+        //   }
+        // });
+        this.$http.get(this.nowNew.content).then(res=>{
+          console.log(res);
+        },fail=>{
+          console.log(fail);
+        })
         this.update = true;
       }, 0);//将此匿名函数重新放入事件队列末尾
     }

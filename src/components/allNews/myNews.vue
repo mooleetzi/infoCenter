@@ -144,12 +144,20 @@ export default {
         this.mgTitle = this.magazine[0].title;
     },
     prevPage() {//重新绑定页面数据
-      if (this.nowPage.previous)
-        this.$store.commit("setNowPage", this.nowPage.previous);
+      if (this.nowPage.previous){
+        this.$http.get(this.nowPage.previous).then(res=>{
+          this.$store.commit('setNowPage',res.data);
+          console.log(res.data);
+        })
+      }
     },
     nextPage() {
-      if (this.nowPage.next)
-        this.$store.commit("setNowPage", this.nowPage.next);
+      if (this.nowPage.next){
+        this.$http.get(this.nowPage.next).then(res=>{
+          this.$store.commit('setNowPage',res.data);
+          console.log(res.data);
+        })
+      }
     },
     open() {//elementUI 信息通知组件
       const h = this.$createElement;

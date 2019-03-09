@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <mySlide :bannerImg="img" :height="100"></mySlide>
+      <mySlide :bannerImg="img.slice(0,4)" :height="100"></mySlide>
     </div>
     <myIndex></myIndex>
   </div>

@@ -1,6 +1,6 @@
 <template>
   <div style="width:100%">
-    <mySlide :bannerImg="nowImg" :height="100"></mySlide>
+    <mySlide :bannerImg="nowImg.slice(0,3)" :height="100"></mySlide>
     <my-news :next="nextId" :prev="prevId" :nowNew="nowNew"></my-news>
   </div>
 </template>
@@ -37,7 +37,6 @@ export default {
           this.nowNew = x;
         }
       });
-      // alert(this.nowIndex);
       if (this.nowIndex == 0) this.prevId = -1;
       else this.prevId = arr[this.nowIndex - 1].id;
       if (this.nowIndex == arr.length - 1) this.nextId = -1;

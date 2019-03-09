@@ -10,7 +10,15 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+      // '/':{
+      //   target:'http://www.cdutzy.com:80/',
+      //   changeOrigin:true,
+      //   pathRewrite:{
+      //     '^/API':'',
+      //   }
+      // }
+    },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST

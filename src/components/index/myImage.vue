@@ -11,11 +11,13 @@
     <div class="create-main">
       <div class="create-wraper">
         <img src="./../../assets/career/img/mockups/ipad-white.svg" alt="" width="100%">
-        <div class="create-item animated fadeIn" v-for="(item, index) in images" :key="index" v-show="flag==index&&index<3">
+        <transition-group appear mode="in-out" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
+          <div class="create-item" v-for="(item, index) in images" :key="item.img_url+index" v-show="flag==index&&index<3">
           <router-link to="/imgDisplay">
             <img v-lazy="item.img_url" width="100%" height="100%">
           </router-link>
         </div>
+        </transition-group>
       </div>
       <div v-for="(item, index) in images" :key="item.img_url" v-if="images&&images.length" v-show="index<3" class="create-navgition">
         <div class="create-navgition-item" @click="change(index)" :class="{'create-focus':index==flag}"></div>
@@ -86,6 +88,7 @@
   }
   &-wraper {
     width: 100%;
+    background-color: transparent;
   }
   &-title {
     float: left;
