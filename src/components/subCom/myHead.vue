@@ -1,11 +1,13 @@
 <template>
   <!-- 头部整体盒子 -->
   <div id="header" class="container-fuild">
-    <div class="header-nav container hidden-xs" :class="{'header-nav-bottom':$store.state.navType==2}">
+    <div class="header-nav container hidden-xs animated fadeIn" :class="{'header-nav-bottom':$store.state.navType==2}">
       <!-- 导航logo -->
       <div class="header-nav-logo">
         <h2 class="careerPc">
-          <a href="/" style="transition:color 1s ease">知涯</a>
+          <a href="/">
+            <img :src="logo" alt="" width="100%">
+          </a>
         </h2>
       </div>
       <!-- 导航内容 -->
@@ -20,7 +22,9 @@
     <!-- 手机导航 -->
     <div class="header-nav-m container-fuild visible-xs">
       <h2 class="career">
-        <a href="#">知涯</a>
+        <a href="#">
+          <img :src="logo" alt="" width="80%">
+        </a>
       </h2>
       <div class="header-nav-m-logo">
         <a href="#" @click="showNav=!showNav">
@@ -50,7 +54,8 @@ export default {
   data() {
     return {
       navInfo: this.$store.state.navInfo,
-      showNav: false
+      showNav: false,
+      logo:require("./../../assets/img/logo.jpg"),
     };
   },
   components: {
@@ -68,7 +73,7 @@ export default {
 @import "element-ui/lib/theme-chalk/base.css";
 
 .header-nav {
-  height: 3rem;
+  height: 5rem;
   overflow: hidden;
   width: 100%;
   @media screen and (max-width: 767px) {
@@ -81,7 +86,7 @@ export default {
 }
 .myHead-nav-item-pc {
   float: left;
-  margin-top: -1.3rem;
+  margin-top: -.5rem;
   margin-right: 2rem;
   clear: none;
   list-style: none;
@@ -99,7 +104,8 @@ export default {
 .careerPc {
   position: absolute;
   left: 20%;
-  top: -2.2rem;
+  top: -2.5rem;
+  width: 5rem;
   @media screen and (max-width: 910px) {
     left: 15%;
   }
@@ -130,7 +136,8 @@ export default {
 
 .career {
   position: absolute;
-  top: -25px;
-  left: 5%;
+  top: -2.4rem;
+  width: 5rem;
+  left: 4%;
 }
 </style>

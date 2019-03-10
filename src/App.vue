@@ -45,7 +45,6 @@ export default {
       true
     );
     this.getImages();
-    //定时向后台获取数据
     setTimeout(this.getMagazine, 3000);
     setTimeout(this.getBarData, 4000);
   },

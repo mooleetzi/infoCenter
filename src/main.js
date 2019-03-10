@@ -20,6 +20,9 @@ import VueVideoPlayer from "vue-video-player";
 import "video.js/dist/video-js.css";
 import VueLazyload from "vue-lazyload";
 import waterfall from 'vue-waterfall2'
+import iView from 'iview';
+import 'iview/dist/styles/iview.css';
+Vue.use(iView);
 Vue.use(waterfall)
 Vue.use(VueLazyload);
 Vue.use(VueVideoPlayer);
